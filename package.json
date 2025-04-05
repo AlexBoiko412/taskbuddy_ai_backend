@@ -1,0 +1,31 @@
+{
+  "name": "taskbuddy_ai_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexBoiko412/taskbuddy_ai_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexBoiko412/taskbuddy_ai_backend/issues"
+  },
+  "homepage": "https://github.com/AlexBoiko412/taskbuddy_ai_backend#readme",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "@types/express": "^5.0.1",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "prisma": "^6.5.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
