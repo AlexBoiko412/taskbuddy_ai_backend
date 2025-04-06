@@ -1,6 +1,5 @@
-import {Prisma, Task} from "@prisma"
+import {Task} from "@prisma"
 import TaskRequestDTO from "../models/taskRequestDTO";
-import TaskUncheckedCreateInput = Prisma.TaskUncheckedCreateInput;
 import TaskResponseDTO from "../models/taskResponseDTO";
 
 export function TaskRequestDtoToTask(taskRequestDTO: TaskRequestDTO): Omit<Task, "id">{
