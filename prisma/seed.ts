@@ -6,27 +6,29 @@ async function main() {
     const max = await prisma.user.create({
         data: {
             email: "maxweel@gmail.com",
-            createdAt: new Date(Date.now()),
+            createdAt: new Date(),
             tasks: {
             },
+            username: "maxweel",
             passwordHash: "asdawd"
         }
     })
     const max2 = await prisma.user.create({
         data: {
             email: "maxweel2@gmail.com",
-            createdAt: new Date(Date.now()),
+            createdAt: new Date(),
             tasks: {
             },
+            username: "maxweel2",
             passwordHash: "password"
         }
     })
     const maxTask = await prisma.task.create({
         data: {
             userId: max.id,
-            createdAt: new Date(Date.now()),
+            createdAt: new Date(),
             completed: false,
-            dueDate: new Date(Date.now()),
+            dueDate: new Date(),
             completedAt: null,
             description: "Task 1",
             title: "Task 1",
@@ -36,9 +38,9 @@ async function main() {
     const maxTask2 = await prisma.task.create({
         data: {
             userId: max.id,
-            createdAt: new Date(Date.now()),
+            createdAt: new Date(),
             completed: false,
-            dueDate: new Date(Date.now()),
+            dueDate: new Date(),
             completedAt: null,
             description: "Task 2",
             title: "Task 2",
@@ -48,9 +50,9 @@ async function main() {
     const max2Task = await prisma.task.create({
         data: {
             userId: max2.id,
-            createdAt: new Date(Date.now()),
+            createdAt: new Date(),
             completed: false,
-            dueDate: new Date(Date.now()),
+            dueDate: new Date(),
             completedAt: null,
             description: "Task 1",
             title: "Task 1",
