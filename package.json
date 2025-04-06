@@ -7,12 +7,14 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx src/server.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlexBoiko412/taskbuddy_ai_backend.git"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -24,9 +26,13 @@
     "@prisma/client": "^6.5.0",
     "@tensorflow/tfjs": "^4.22.0",
     "@types/express": "^5.0.1",
-    "express": "^5.1.0"
+    "bcrypt": "^5.1.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.0",
     "prisma": "^6.5.0",
     "ts-node": "^10.9.2",
