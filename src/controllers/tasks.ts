@@ -64,3 +64,21 @@ export async function completeTask(req: AuthenticatedRequest, res: Response) {
         res.status(400).json({ error: (error as Error).message });
     }
 }
+
+export  async function deleteTask(req: AuthenticatedRequest, res: Response) {
+    try {
+        const { id } = req.params;
+        const userId = req.user?.id;
+
+        if (!userId) {
+            res.status(401).json({ error: 'Unauthorized: User not authenticated' });
+            return;
+        }
+
+        const taskResponseDTO = await taskService.deleteTask(id, userId);
+
+        res.json(taskResponseDTO);
+    } catch (error) {
+        res.status(400).json({ error: (error as Error).message });
+    }
+}

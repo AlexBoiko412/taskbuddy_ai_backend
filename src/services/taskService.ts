@@ -36,3 +36,15 @@ export async function completeTask(id: string, userId: string): Promise<TaskResp
 
     return Mapper.TaskToResponseDto(newTask);
 }
+
+export async function deleteTask(id: string, userId: string): Promise<TaskResponseDTO> {
+    const tasks = await taskData.getTasksByUserId(userId);
+
+    if (!tasks.find(t => t.id === id)) {
+        throw new Error('Task not found or not owned by user');
+    }
+
+    const deletedTask = await taskData.deleteTask(id)
+
+    return Mapper.TaskToResponseDto(deletedTask);
+}
