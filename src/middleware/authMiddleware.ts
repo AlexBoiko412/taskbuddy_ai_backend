@@ -10,7 +10,7 @@ interface AuthRequest extends Request {
 
 const JWT_SECRET = process.env.JWT_SECRET || "default_secret";
 
-export function authMiddleware(req: AuthRequest, res: Response, next: NextFunction) {
+export function authMiddleware(req: AuthRequest, res: Response, next: NextFunction): void {
 
     const authHeader = req.headers.authorization;
 
