@@ -7,7 +7,7 @@ interface AuthenticatedRequest extends Request {
     user?: { id: string; email: string };
 }
 
-export async function createTask(req: AuthenticatedRequest, res: Response) {
+export async function createTask(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
         const taskRequestDTO: TaskRequestDTO = req.body;
         const userId = req.user?.id;
@@ -23,7 +23,6 @@ export async function createTask(req: AuthenticatedRequest, res: Response) {
         }
 
         const taskWithUserId: TaskRequestDTO = { ...taskRequestDTO, userId };
-
         const taskResponseDTO: TaskResponseDTO = await taskService.createTask(taskWithUserId);
         res.status(201).json(taskResponseDTO);
     } catch (error) {
@@ -31,7 +30,7 @@ export async function createTask(req: AuthenticatedRequest, res: Response) {
     }
 }
 
-export async function getTasks(req: AuthenticatedRequest, res: Response) {
+export async function getTasks(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
         const userId = req.user?.id;
 
@@ -47,7 +46,7 @@ export async function getTasks(req: AuthenticatedRequest, res: Response) {
     }
 }
 
-export async function completeTask(req: AuthenticatedRequest, res: Response) {
+export async function completeTask(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const userId = req.user?.id;
@@ -57,15 +56,14 @@ export async function completeTask(req: AuthenticatedRequest, res: Response) {
             return;
         }
 
-        const taskResponseDTO = await taskService.completeTask(id, userId);
-
+        const taskResponseDTO: TaskResponseDTO = await taskService.completeTask(id, userId);
         res.json(taskResponseDTO);
     } catch (error) {
         res.status(400).json({ error: (error as Error).message });
     }
 }
 
-export  async function deleteTask(req: AuthenticatedRequest, res: Response) {
+export async function deleteTask(req: AuthenticatedRequest, res: Response): Promise<void> {
     try {
         const { id } = req.params;
         const userId = req.user?.id;
@@ -75,8 +73,7 @@ export  async function deleteTask(req: AuthenticatedRequest, res: Response) {
             return;
         }
 
-        const taskResponseDTO = await taskService.deleteTask(id, userId);
-
+        const taskResponseDTO: TaskResponseDTO = await taskService.deleteTask(id, userId);
         res.json(taskResponseDTO);
     } catch (error) {
         res.status(400).json({ error: (error as Error).message });
