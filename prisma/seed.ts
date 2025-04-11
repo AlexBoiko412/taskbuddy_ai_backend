@@ -1,72 +1,78 @@
-import {PrismaClient} from "../generated/prisma";
+import { PrismaClient } from '@prisma';
+import { hash } from 'bcrypt';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
+    const passwordHash1 = await hash('password1', 10);
+    const passwordHash2 = await hash('password2', 10);
+
     const max = await prisma.user.create({
         data: {
-            email: "maxweel@gmail.com",
+            email: 'maxweel@gmail.com',
+            username: 'maxweel',
+            passwordHash: passwordHash1,
             createdAt: new Date(),
-            tasks: {
-            },
-            username: "maxweel",
-            passwordHash: "asdawd"
-        }
-    })
+        },
+    });
+
     const max2 = await prisma.user.create({
         data: {
-            email: "maxweel2@gmail.com",
+            email: 'maxweel2@gmail.com',
+            username: 'maxweel2',
+            passwordHash: passwordHash2,
             createdAt: new Date(),
-            tasks: {
-            },
-            username: "maxweel2",
-            passwordHash: "password"
-        }
-    })
+        },
+    });
+
     const maxTask = await prisma.task.create({
         data: {
             userId: max.id,
-            createdAt: new Date(),
+            title: 'Task 1',
+            description: 'Task 1 description',
+            dueDate: new Date('2025-04-10T18:00:00Z'),
+            priority: 5,
             completed: false,
-            dueDate: new Date(),
+            createdAt: new Date(),
             completedAt: null,
-            description: "Task 1",
-            title: "Task 1",
-            priority: 5
-        }
-    })
+        },
+    });
+
     const maxTask2 = await prisma.task.create({
         data: {
             userId: max.id,
-            createdAt: new Date(),
+            title: 'Task 2',
+            description: 'Task 2 description',
+            dueDate: new Date('2025-04-15T12:00:00Z'),
+            priority: 5,
             completed: false,
-            dueDate: new Date(),
+            createdAt: new Date(),
             completedAt: null,
-            description: "Task 2",
-            title: "Task 2",
-            priority: 5
-        }
-    })
+        },
+    });
+
     const max2Task = await prisma.task.create({
         data: {
             userId: max2.id,
-            createdAt: new Date(),
+            title: 'Task 1',
+            description: 'Task 1 description',
+            dueDate: new Date('2025-04-12T09:00:00Z'),
+            priority: 5,
             completed: false,
-            dueDate: new Date(),
+            createdAt: new Date(),
             completedAt: null,
-            description: "Task 1",
-            title: "Task 1",
-            priority: 5
-        }
-    })
-    console.log({ max, maxTask, max2Task })
+        },
+    });
+
+    console.log({ max, maxTask, maxTask2, max2, max2Task });
 }
+
 main()
     .then(async () => {
-        await prisma.$disconnect()
+        await prisma.$disconnect();
     })
     .catch(async (e) => {
-        console.error(e)
-        await prisma.$disconnect()
-        process.exit(1)
-    })
+        console.error(e);
+        await prisma.$disconnect();
+        process.exit(1);
+    });
