@@ -1,10 +1,10 @@
-import LoginResponseDTO from "../models/loginResponseDTO";
-import LoginRequestDTO from "../models/loginRequestDTO";
-import {hash, compare} from 'bcrypt'
+import LoginResponseDTO from '../models/loginResponseDTO';
+import LoginRequestDTO from '../models/loginRequestDTO';
+import { hash, compare } from 'bcrypt';
 import * as userData from '../data/userData';
 import jwt from 'jsonwebtoken';
-import RegisterRequestDTO from "../models/registerRequestDTO";
-import RegisterResponseDTO from "../models/registerResponseDTO";
+import RegisterRequestDTO from '../models/registerRequestDTO';
+import RegisterResponseDTO from '../models/registerResponseDTO';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret';
 
@@ -22,11 +22,11 @@ export async function login(loginRequestDTO: LoginRequestDTO): Promise<LoginResp
     return { token, username: user.username, email: user.email };
 }
 
-export async function register(loginRequestDTO: RegisterRequestDTO): Promise<RegisterResponseDTO> {
-    const passwordHash = await hash(loginRequestDTO.password, 10);
+export async function register(registerRequestDTO: RegisterRequestDTO): Promise<RegisterResponseDTO> {
+    const passwordHash = await hash(registerRequestDTO.password, 10);
     const user = await userData.createUser({
-        username: loginRequestDTO.username,
-        email: loginRequestDTO.email,
+        username: registerRequestDTO.username,
+        email: registerRequestDTO.email,
         passwordHash,
         createdAt: new Date(),
     });
@@ -38,6 +38,6 @@ export async function register(loginRequestDTO: RegisterRequestDTO): Promise<Reg
     return {
         username: user.username,
         email: user.email,
-        token
+        token,
     };
 }
