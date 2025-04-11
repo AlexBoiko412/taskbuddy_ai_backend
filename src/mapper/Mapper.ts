@@ -1,8 +1,8 @@
-import {Task} from "@prisma"
-import TaskRequestDTO from "../models/taskRequestDTO";
-import TaskResponseDTO from "../models/taskResponseDTO";
+import { Task } from '@prisma';
+import TaskRequestDTO from '../models/taskRequestDTO';
+import TaskResponseDTO from '../models/taskResponseDTO';
 
-export function TaskRequestDtoToTask(taskRequestDTO: TaskRequestDTO): Omit<Task, "id">{
+export function TaskRequestDtoToTask(taskRequestDTO: TaskRequestDTO): Omit<Task, 'id'> {
     return {
         userId: taskRequestDTO.userId,
         title: taskRequestDTO.title,
@@ -11,7 +11,7 @@ export function TaskRequestDtoToTask(taskRequestDTO: TaskRequestDTO): Omit<Task,
         priority: taskRequestDTO.priority || 5,
         completed: taskRequestDTO.completed || false,
         createdAt: taskRequestDTO.createdAt || new Date(),
-        completedAt: taskRequestDTO.completedAt || null
+        completedAt: taskRequestDTO.completedAt || null,
     };
 }
 
@@ -21,10 +21,10 @@ export function TaskToResponseDto(task: Task): TaskResponseDTO {
         userId: task.userId,
         title: task.title,
         description: task.description,
-        dueDate: task.dueDate ? task.dueDate.toString() : null,
+        dueDate: task.dueDate ? task.dueDate.toISOString() : null,
         priority: task.priority,
         completed: task.completed,
-        createdAt: task.createdAt,
-        completedAt: task.completedAt
+        createdAt: task.createdAt.toISOString(),
+        completedAt: task.completedAt ? task.completedAt.toISOString() : null,
     };
 }

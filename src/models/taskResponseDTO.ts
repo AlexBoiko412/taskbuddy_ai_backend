@@ -6,6 +6,6 @@ export default interface TaskResponseDTO {
     dueDate: string | null;
     priority: number;
     completed: boolean;
-    createdAt: Date;
-    completedAt: Date | null
+    createdAt: string;
+    completedAt: string | null
 }
