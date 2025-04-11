@@ -19,7 +19,7 @@ export async function login(loginRequestDTO: LoginRequestDTO): Promise<LoginResp
         expiresIn: '48h',
     });
 
-    return { token, username: user.id, email: user.email };
+    return { token, username: user.username, email: user.email };
 }
 
 export async function register(loginRequestDTO: RegisterRequestDTO): Promise<RegisterResponseDTO> {
